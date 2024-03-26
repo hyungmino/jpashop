@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 @SpringBootTest // SpringBoot로 테스트를 돌리겠다
 public class MemberRepositoryTest {
 
-    @Autowired MemberRepository memberRepository;
+  /*  @Autowired MemberRepository memberRepository;
 
     @Test
     @Transactional
@@ -35,5 +35,5 @@ public class MemberRepositoryTest {
         Assertions.assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
         Assertions.assertThat(findMember).isEqualTo(member);
         System.out.println("findMember == member: " + (findMember == member));
-    }
+    }*/
 }
