@@ -8,6 +8,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 @Entity
 @Getter
 @Setter
@@ -28,6 +30,17 @@ public class Category {
             inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "parent_id")
     private Category parent;        // 내 부모가 내 타입이니까 넣어줌
+
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child = new ArrayList<>();   // 자식은 여러개 가질 수 있음
+
+    //==연관관계 메서드==//
+    public void addChildCategory(Category child) {
+        this.child.add(child);  // 부모컬렉션에도 child 들어가야됨
+        child.setParent(this);  // 자식에서도 부모가 누군지를 알아야됨
+    }
+
 }
